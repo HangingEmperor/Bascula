@@ -29,10 +29,10 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Slider fx:id="sliderKilogramos" layoutX="13.0" layoutY="116.0" max="150.0" prefHeight="15.0" prefWidth="275.0" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="sliderKilogramos" layoutX="13.0" layoutY="116.0" max="125.0" prefHeight="15.0" prefWidth="275.0" showTickLabels="true" showTickMarks="true" />
                 <TextField fx:id="textfieldKilogramos" layoutX="13.0" layoutY="154.0" onKeyPressed="#putData" prefHeight="25.0" prefWidth="269.0" />
                 <TextField fx:id="textfieldLibras" layoutX="13.0" layoutY="303.0" onKeyPressed="#putData" prefHeight="25.0" prefWidth="269.0" />
-                <Slider fx:id="sliderLibras" layoutX="13.0" layoutY="265.0" max="300.0" prefHeight="15.0" prefWidth="269.0" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="sliderLibras" layoutX="13.0" layoutY="265.0" max="275.0" prefHeight="15.0" prefWidth="269.0" showTickLabels="true" showTickMarks="true" />
                 <Label fx:id="labelLibras" layoutX="14.0" layoutY="224.0" text="Libras">
                     <font>
                         <Font size="20.0" />

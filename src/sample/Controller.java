@@ -16,8 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import javax.swing.*;
+import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller implements Initializable {
 
@@ -54,34 +59,81 @@ public class Controller implements Initializable {
                 textfieldKilogramos.setText("");
             } else {
                 sliderKilogramos.setValue(Double.parseDouble(textfieldKilogramos.getText()));
-                // falta colocar slider libras
-                labelKilogramos.setText(textfieldKilogramos.getText() + " kg");
+                labelKilogramos.setText("Kilogramos: " + textfieldKilogramos.getText() + " kg");
             }
         }
     }
 
     @FXML
     void saveData(ActionEvent event) {
+        File file = new File("log.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Date ahora = new Date();
+            SimpleDateFormat formateador = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
+            String aux = "";
+            String oldData = "";
+            FileReader hoja = new FileReader(file);
+            BufferedReader lee = new BufferedReader(hoja);
+            while ((aux = lee.readLine()) != null) {
+                oldData += aux + "\n";
+            }
+            lee.close();
+
+            FileWriter archivo = new FileWriter(file);
+            archivo.append(oldData);
+            archivo.append("Fecha: " + formateador.format(ahora));
+            archivo.append(" | KG: " + labelKilogramos.getText() + " , LB: " + labelLibras.getText());
+            archivo.close();
+        } catch (IOException ex) {
+            System.out.println("Hubo un error");
+        }
     }
 
     @FXML
     void viewData(ActionEvent event) {
+        File file = new File("log.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        String aux = "";
+        String oldData = "";
 
+        try {
+            FileReader hoja = new FileReader(file);
+            BufferedReader lee = new BufferedReader(hoja);
+            while ((aux = lee.readLine()) != null) {
+                oldData += aux + "\n";
+            }
+            lee.close();
+            JOptionPane.showMessageDialog(null, oldData);
+        } catch (IOException io) {
+            JOptionPane.showConfirmDialog(null, "No se encontro el archivo");
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Falta mover los sliders al desplazar uno
         sliderKilogramos.valueProperty().addListener((observable, oldValue, newValue) -> {
             labelKilogramos.setText("Kilogramos: " + (float) sliderKilogramos.getValue() + " kg");
             labelLibras.setText("Libras: " + (float) (sliderKilogramos.getValue() * 2.20462) + " lb");
+            sliderLibras.setValue(sliderKilogramos.getValue() * 2.20462);
         });
 
         sliderLibras.valueProperty().addListener((observable, oldValue, newValue) -> {
             labelLibras.setText("Kilogramos: " + (float) sliderLibras.getValue() + " lb");
             labelKilogramos.setText("Libras: " + (float) (sliderLibras.getValue() * 0.453592) + " kg");
-
         });
     }
 }
