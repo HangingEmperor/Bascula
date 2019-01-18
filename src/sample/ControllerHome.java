@@ -6,14 +6,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.*;
@@ -24,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Controller implements Initializable {
+public class ControllerHome implements Initializable {
 
     @FXML
     private Pane panelBackground;
@@ -107,17 +105,24 @@ public class Controller implements Initializable {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        String aux = "";
-        String oldData = "";
 
         try {
+            String aux = "";
+            String oldData = "";
+
             FileReader hoja = new FileReader(file);
             BufferedReader lee = new BufferedReader(hoja);
             while ((aux = lee.readLine()) != null) {
                 oldData += aux + "\n";
             }
             lee.close();
-            JOptionPane.showMessageDialog(null, oldData);
+
+            Alert dialogAlert = new Alert(Alert.AlertType.INFORMATION);
+            dialogAlert.setTitle("About");
+            dialogAlert.setHeaderText(null);
+            dialogAlert.setContentText(oldData);
+            dialogAlert.initStyle(StageStyle.UTILITY);
+            dialogAlert.showAndWait();
         } catch (IOException io) {
             JOptionPane.showConfirmDialog(null, "No se encontro el archivo");
         }

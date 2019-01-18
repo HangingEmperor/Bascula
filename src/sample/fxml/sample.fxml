@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.ControllerHome">
+    <children>
+        <Pane fx:id="panelBar" prefHeight="24.0" prefWidth="300.0" style="-fx-background-color: black;">
+            <children>
+                <Label fx:id="labelTitle" layoutX="34.0" layoutY="5.0" text="labelTitle" textFill="WHITE"/>
+            </children>
+        </Pane>
+        <Pane fx:id="panelBackground" layoutY="25.0" prefHeight="450.0" prefWidth="300.0">
+            <children>
+                <Label layoutX="98.0" layoutY="14.0" text="Bascula">
+                    <font>
+                        <Font size="28.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="labelKilogramos" layoutX="14.0" layoutY="75.0" text="Kilogramos">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Slider fx:id="sliderKilogramos" layoutX="13.0" layoutY="116.0" max="125.0" prefHeight="15.0"
+                        prefWidth="275.0" showTickLabels="true" showTickMarks="true"/>
+                <TextField fx:id="textfieldKilogramos" layoutX="13.0" layoutY="154.0" onKeyPressed="#putData"
+                           prefHeight="25.0" prefWidth="269.0"/>
+                <TextField fx:id="textfieldLibras" layoutX="13.0" layoutY="303.0" onKeyPressed="#putData"
+                           prefHeight="25.0" prefWidth="269.0"/>
+                <Slider fx:id="sliderLibras" layoutX="13.0" layoutY="265.0" max="275.0" prefHeight="15.0"
+                        prefWidth="269.0" showTickLabels="true" showTickMarks="true"/>
+                <Label fx:id="labelLibras" layoutX="14.0" layoutY="224.0" text="Libras">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Button fx:id="buttonSaveData" layoutX="97.0" layoutY="367.0" mnemonicParsing="false"
+                        onAction="#saveData" text="Guardar registro"/>
+                <Button fx:id="buttonViewData" layoutX="113.0" layoutY="404.0" mnemonicParsing="false"
+                        onAction="#viewData" text="Ver registro"/>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
