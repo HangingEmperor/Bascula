@@ -5,12 +5,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.swing.*;
@@ -49,11 +53,11 @@ public class ControllerHome implements Initializable {
 
     @FXML
     void putData(KeyEvent event) {
+        /* Falta poder modificar ambas cosas al hacer Enter. */
         if (event.getCode() == KeyCode.ENTER) {
             if (textfieldKilogramos.getText().matches("[a-zA-Z]+")
                     || textfieldKilogramos.getText().matches("[0-9]+[a-zA-Z]+")
                     || textfieldKilogramos.getText().matches("[a-zA-Z]+[0-9]+")) {
-                JOptionPane.showMessageDialog(null, "Solo se admiten digitos.");
                 textfieldKilogramos.setText("");
             } else {
                 sliderKilogramos.setValue(Double.parseDouble(textfieldKilogramos.getText()));
@@ -117,12 +121,13 @@ public class ControllerHome implements Initializable {
             }
             lee.close();
 
-            Alert dialogAlert = new Alert(Alert.AlertType.INFORMATION);
-            dialogAlert.setTitle("About");
-            dialogAlert.setHeaderText(null);
-            dialogAlert.setContentText(oldData);
-            dialogAlert.initStyle(StageStyle.UTILITY);
-            dialogAlert.showAndWait();
+            Data.setAllSaveData(oldData);
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/information.fxml"));
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("View data");
+            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setResizable(false);
+            primaryStage.show();
         } catch (IOException io) {
             JOptionPane.showConfirmDialog(null, "No se encontro el archivo");
         }
