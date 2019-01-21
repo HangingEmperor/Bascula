@@ -59,6 +59,7 @@ public class ControllerHome implements Initializable {
                     || textfieldKilogramos.getText().matches("[0-9]+[a-zA-Z]+")
                     || textfieldKilogramos.getText().matches("[a-zA-Z]+[0-9]+")) {
                 textfieldKilogramos.setText("");
+                //
             } else {
                 sliderKilogramos.setValue(Double.parseDouble(textfieldKilogramos.getText()));
                 labelKilogramos.setText("Kilogramos: " + textfieldKilogramos.getText() + " kg");
